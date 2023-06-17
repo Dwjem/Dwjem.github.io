@@ -1,0 +1,35 @@
+name: 发布项目到github.io/react/index
+# 当代码推送至 dev 分支时触发
+on:
+  push:
+    branches:
+      - dev
+# 定义一个任务
+jobs:
+  build-and-deploy:
+    # 运行该任务的环境
+    runs-on: ubuntu-latest
+    # 该任务的步骤
+    steps:
+      # 步骤一：检出代码
+      - name: 步骤一：检出代码
+        uses: actions/checkout@v2
+        with: 
+          repository: git@github.com:Dwjem/react.dome.git
+          ref: dev
+      # 步骤二：安装依赖项
+      - name: 步骤二：安装依赖项
+        run: npm install
+      
+      # 步骤三：构建项目
+      - name: 步骤三：构建项目
+        run: npm run build
+      
+      # 步骤四：发布构建结果
+      - name: 步骤四：发布构建结果
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_dir_name: my-app # 发布的目录名称
+          publish_branch: gh-pages # 发布分支
