@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkarco_design_pro=self.webpackChunkarco_design_pro||[]).push([[709],{34709:function(e,a,c){e.exports=c.p+"static/media/readme.aad701c7c5e25a4a4bce.md"}}]);
