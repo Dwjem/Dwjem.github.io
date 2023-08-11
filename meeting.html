@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老婆回来啦!</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-size: 100%;
+        }
+        .content{
+            width: 100%;height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            /* 背景虚化 */
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h1 id="time"></h1>
+    </div>
+    <script>
+        // 计算当前时间距离2023-08-15 18:00:00 还有几天几小时几分几秒
+        let target = new Date('2023/08/15 18:00:00');
+        let now,diff,days,hours,minutes,seconds;
+        const time = document.getElementById('time');
+        let timer;
+        function computed_time(){
+            // 1. 获取当前时间
+            now = new Date();
+            // 2. 计算时间差
+            diff = target - now;
+            // 3. 计算天数
+            days = Math.floor(diff / 1000 / 60 / 60 / 24);
+            // 4. 计算小时
+            hours = Math.floor(diff / 1000 / 60 / 60 % 24);
+            // 5. 计算分钟
+            minutes = Math.floor(diff / 1000 / 60 % 60);
+            // 6. 计算秒数
+            seconds = Math.floor(diff / 1000 % 60);
+            time.innerText = "距离见到老婆还有" + days + "天" + hours + "小时" + minutes + "分钟" + seconds + "秒";
+            if(diff<=0){
+                time.innerText = "应该见到了吧";
+                // 8. 清除定时器
+                clearInterval(timer)
+            }
+        }
+        // 7. 倒计时
+        timer = setInterval(computed_time, 1000);
+        computed_time()
+            
+        // 获取浏览器的宽高
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        console.log(width, height);
+        let bgimgurl = `https://dogefs.s3.ladydaily.com/~/source/wallhaven/full/gp/wallhaven-gp9god.jpg?w=${width}&h=${height}&fmt=webp`
+        // 设置
+        document.body.style.backgroundImage = `url(${bgimgurl})`;
+        // 设置
+        document.body.style.backgroundSize = `cover`;
+    </script>
+</body>
+
+</html>
